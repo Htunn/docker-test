@@ -1,0 +1,25 @@
+---
+- name: Install LAMP Stack
+  hosts: localhost
+  become: True
+  tasks:
+     - name: Install Latest Python Version
+       apt:
+          state: latest
+          name: python-pip
+     
+     - name: Install Latest Docker and pip_requests
+       pip:
+          name:
+             - docker
+             - requests>=2.20.1
+
+     - name: Install Mariadb Image
+       docker_image:
+               name: mariadb
+               source: pull
+     
+     - name: Install Nginx Image
+       docker_image:
+               name: nginx
+               source: pull
